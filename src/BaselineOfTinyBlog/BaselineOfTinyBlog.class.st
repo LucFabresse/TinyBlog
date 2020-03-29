@@ -10,7 +10,9 @@ BaselineOfTinyBlog >> baseline: spec [
 	
 	spec for: #'common' do: [
 		spec baseline: 'PharoWeb' with: [ spec repository: 'github://LucFabresse/PharoWeb/src' ].
-		spec package: 'TinyBlog'.
-		spec group: 'default' with: #( 'TinyBlog' )
+		spec package: 'TinyBlog' with: [ spec requires: #('PharoWeb') ].
+		spec package: 'TinyBlog-Tests' with: [ spec requires: #('TinyBlog') ].
+		
+		spec group: 'default' with: #( 'TinyBlog' 'TinyBlog-Tests' )
 	]
 ]
