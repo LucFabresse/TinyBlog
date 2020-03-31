@@ -18,7 +18,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #TinyBlog
+	#category : #'TinyBlog-Model'
 }
 
 { #category : #'data sample' }

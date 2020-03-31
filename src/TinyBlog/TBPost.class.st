@@ -13,7 +13,7 @@ Class {
 		'title',
 		'visible'
 	],
-	#category : #TinyBlog
+	#category : #'TinyBlog-Model'
 }
 
 { #category : #'instance creation' }
