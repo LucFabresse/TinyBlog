@@ -1,8 +1,3 @@
-"
-I am a simple component to manage the admin header.
-I have specific buttons for admins: disconnect, ...
-
-"
 Class {
 	#name : #TBAdminHeaderComponent,
 	#superclass : #TBHeaderComponent,
@@ -18,12 +13,12 @@ TBAdminHeaderComponent >> renderButtonsOn: html [
 
 { #category : #rendering }
 TBAdminHeaderComponent >> renderDisconnectButtonOn: html [
-         html tbsNavbarButton
-            tbsPullRight;
-            callback: [ self session reset ];
-            with: [
-               html text: 'Disconnect '.
-               html tbsGlyphIcon iconLogout ]
+   html tbsNavbarButton 
+      tbsPullRight; 
+      callback: [ self session reset ];
+      with: [  
+         html text: 'Disconnect '.
+         html tbsGlyphIcon iconLogout ]
 ]
 
 { #category : #rendering }

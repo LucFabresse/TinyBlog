@@ -1,7 +1,3 @@
-"
-I represent a session.
-we can store information there and share it among all components of the Seaside  application.
-"
 Class {
 	#name : #TBSession,
 	#superclass : #WASession,

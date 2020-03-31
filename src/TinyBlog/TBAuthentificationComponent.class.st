@@ -1,6 +1,3 @@
-"
-I am a reusable modal to authenticate users using login / password
-"
 Class {
 	#name : #TBAuthentificationComponent,
 	#superclass : #WAComponent,
@@ -21,32 +18,32 @@ TBAuthentificationComponent class >> from: aComponent [
 
 { #category : #accessing }
 TBAuthentificationComponent >> account [
-	^ account
+   ^ account
 ]
 
 { #category : #accessing }
 TBAuthentificationComponent >> account: anObject [
-	account := anObject
+   account := anObject
 ]
 
 { #category : #accessing }
 TBAuthentificationComponent >> component [
-	^ component
+   ^ component
 ]
 
 { #category : #accessing }
 TBAuthentificationComponent >> component: anObject [
-	component := anObject
+   component := anObject
 ]
 
 { #category : #accessing }
 TBAuthentificationComponent >> password [
-	^ password
+   ^ password
 ]
 
 { #category : #accessing }
 TBAuthentificationComponent >> password: anObject [
-	password := anObject
+   password := anObject
 ]
 
 { #category : #rendering }
@@ -62,12 +59,13 @@ TBAuthentificationComponent >> renderAccountFieldOn: html [
 
 { #category : #rendering }
 TBAuthentificationComponent >> renderBodyOn: html [
-    html tbsModalBody: [
-		html tbsForm: [
-			self renderAccountFieldOn: html.
-			self renderPasswordFieldOn: html.
-			html tbsModalFooter: [ self renderButtonsOn: html ]
-		]]
+    html
+        tbsModalBody: [
+            html tbsForm: [
+                self renderAccountFieldOn: html.
+                self renderPasswordFieldOn: html.
+                html tbsModalFooter: [ self renderButtonsOn: html ]
+]]
 ]
 
 { #category : #rendering }
@@ -96,24 +94,30 @@ TBAuthentificationComponent >> renderContentOn: html [
 
 { #category : #rendering }
 TBAuthentificationComponent >> renderHeaderOn: html [
-   html tbsModalHeader: [
+   html
+      tbsModalHeader: [
          html tbsModalCloseIcon.
          html tbsModalTitle
             level: 4;
             with: 'Authentication' ]
+
 ]
 
 { #category : #rendering }
 TBAuthentificationComponent >> renderPasswordFieldOn: html [
    html tbsFormGroup: [
-      html label with: 'Password'.
+
+
+       html label with: 'Password'.
       html passwordInput
          tbsFormControl;
          callback: [ :value | password := value ];
          value: password ]
 ]
 
-{ #category : #actions }
+{ #category : #rendering }
 TBAuthentificationComponent >> validate [
-  ^ component tryConnectionWithLogin: self account andPassword: self password
+  ^ component tryConnectionWithLogin: self account andPassword: self
+password
+
 ]

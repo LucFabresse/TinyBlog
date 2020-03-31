@@ -62,6 +62,77 @@ TBPost >> date: aDate [
 	date := aDate
 ]
 
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionCategory [
+    <magritteDescription>
+    ^ MAStringDescription new
+        label: 'Category';
+        priority: 300;
+        accessor: #category;
+        comment: 'Unclassified if empty';
+        componentClass: TBSMagritteTextInputComponent;
+        yourself
+]
+
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionContainer [
+    <magritteContainer>
+    ^ super descriptionContainer
+        componentRenderer: TBSMagritteFormRenderer;
+        yourself
+]
+
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionDate [
+   <magritteDescription>
+   ^ MADateDescription new
+      label: 'Date';
+      priority: 400;
+      accessor: #date;
+      beRequired;
+      yourself
+]
+
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionText [
+    <magritteDescription>
+    ^ MAMemoDescription new
+        label: 'Text';
+        priority: 200;
+        accessor: #text;
+        beRequired;
+        requiredErrorMessage: 'A blog post must contain a text.';
+        comment: 'Please enter a text';
+        componentClass: TBSMagritteTextAreaComponent;
+        yourself
+]
+
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionTitle [
+    <magritteDescription>
+    ^ MAStringDescription new
+        label: 'Title';
+        priority: 100;
+        accessor: #title;
+        requiredErrorMessage: 'A blog post must have a title.';
+        comment: 'Please enter a title';
+        componentClass: TBSMagritteTextInputComponent;
+        beRequired;
+        yourself
+]
+
+{ #category : #'magrittes-descriptions' }
+TBPost >> descriptionVisible [
+    <magritteDescription>
+    ^ MABooleanDescription new
+        checkboxLabel: 'Visible';
+        priority: 500;
+        accessor: #visible;
+        componentClass: TBSMagritteCheckboxComponent;
+        beRequired;
+        yourself
+]
+
 { #category : #initialization }
 TBPost >> initialize [
 	super initialize.
