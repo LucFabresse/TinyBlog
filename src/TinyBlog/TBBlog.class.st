@@ -13,7 +13,8 @@ Class {
 	#name : #TBBlog,
 	#superclass : #Object,
 	#instVars : [
-		'posts'
+		'posts',
+		'adminUser'
 	],
 	#classInstVars : [
 		'uniqueInstance'
@@ -38,6 +39,16 @@ TBBlog class >> current [
 	^ self selectAll
 		ifNotEmpty: [ :x | x anyOne ]
 		ifEmpty: [ self new save ]
+]
+
+{ #category : #'default values' }
+TBBlog class >> defaultAdminLogin [
+   ^ 'admin'
+]
+
+{ #category : #'default values' }
+TBBlog class >> defaultAdminPassword [
+   ^ 'topsecret'
 ]
 
 { #category : #'class initialization' }
@@ -70,6 +81,11 @@ TBBlog class >> reset [
 ]
 
 { #category : #accessing }
+TBBlog >> administrator [
+   ^ adminUser
+]
+
+{ #category : #accessing }
 TBBlog >> allBlogPosts [
    ^ posts
 ]
@@ -95,9 +111,16 @@ TBBlog >> allVisibleBlogPostsFromCategory: aCategory [
 ]
 
 { #category : #initialization }
+TBBlog >> createAdministrator [
+   ^ TBAdministrator login: self class defaultAdminLogin password: self class defaultAdminPassword
+
+]
+
+{ #category : #initialization }
 TBBlog >> initialize [
-	super initialize.
-	posts := OrderedCollection new
+   super initialize.
+   posts := OrderedCollection new.
+   adminUser := self createAdministrator
 ]
 
 { #category : #operations }
