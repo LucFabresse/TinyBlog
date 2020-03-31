@@ -1,3 +1,8 @@
+"
+A  TBPost is a blog post.
+
+
+"
 Class {
 	#name : #TBPost,
 	#superclass : #Object,
@@ -12,21 +17,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-TBPost class >> title: arg1 text: arg2 [
-	| tmp2 |
-	tmp2 := self new.
-	tmp2
-		title: arg1;
-		text: arg2.
-	^ tmp2 yourself
+TBPost class >> title: aTitle text: aText [ 
+	^ self new
+		title: aTitle;
+		text: aText;
+		yourself
 ]
 
 { #category : #'instance creation' }
-TBPost class >> title: arg1 text: arg2 category: arg3 [
-	| tmp2 |
-	tmp2 := self title: arg1 text: arg2.
-	tmp2 category: arg3.
-	^ tmp2 yourself
+TBPost class >> title: aTitle text: aText category: aCategory [
+	^ (self title: aTitle text: aText)
+			category: aCategory;
+			yourself
 ]
 
 { #category : #constants }
@@ -36,7 +38,7 @@ TBPost class >> unclassifiedTag [
 
 { #category : #action }
 TBPost >> beVisible [
-	self visible: true
+   self visible: true
 ]
 
 { #category : #accessing }
@@ -45,8 +47,9 @@ TBPost >> category [
 ]
 
 { #category : #accessing }
-TBPost >> category: arg1 [
-	category := arg1
+TBPost >> category: aString [
+	category := aString
+
 ]
 
 { #category : #accessing }
@@ -55,32 +58,31 @@ TBPost >> date [
 ]
 
 { #category : #accessing }
-TBPost >> date: arg1 [
-	date := arg1
+TBPost >> date: aDate [
+	date := aDate
 ]
 
 { #category : #initialization }
 TBPost >> initialize [
 	super initialize.
-	self
-		category: self class unclassifiedTag;
-		date: Date today;
-		notVisible
+	self category: self class unclassifiedTag.
+	self date: Date today.
+	self notVisible
 ]
 
 { #category : #testing }
 TBPost >> isUnclassified [
-	^ self category = self class unclassifiedTag
+   ^ self category = self class unclassifiedTag
 ]
 
 { #category : #testing }
 TBPost >> isVisible [
-	^ self visible
+   ^ self visible
 ]
 
 { #category : #action }
 TBPost >> notVisible [
-	self visible: false
+   self visible: false
 ]
 
 { #category : #accessing }
@@ -89,8 +91,8 @@ TBPost >> text [
 ]
 
 { #category : #accessing }
-TBPost >> text: arg1 [
-	text := arg1
+TBPost >> text: aString [
+	text := aString
 ]
 
 { #category : #accessing }
@@ -99,8 +101,8 @@ TBPost >> title [
 ]
 
 { #category : #accessing }
-TBPost >> title: arg1 [
-	title := arg1
+TBPost >> title: aString [
+	title := aString
 ]
 
 { #category : #accessing }
@@ -109,6 +111,6 @@ TBPost >> visible [
 ]
 
 { #category : #accessing }
-TBPost >> visible: arg1 [
-	visible := arg1
+TBPost >> visible: aBoolean [
+	visible := aBoolean
 ]
