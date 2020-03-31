@@ -1,5 +1,13 @@
 "
-a TBBlog represents a blog that contains posts
+a TBBlog represents a blog that contains posts.
+
+TBBlog is a Voyage root.
+The singleton blog object is stored in a Voyage repository that can be attached to a memory or a Mongo backend.
+
+How to reset the database:
+
+	TBBlog reset.
+	TBBlog createDemoPosts
 "
 Class {
 	#name : #TBBlog,
@@ -25,11 +33,11 @@ TBBlog class >> createDemoPosts [
       writeBlogPost: ((TBPost title: 'Working with Pharo on the Raspberry Pi' text: 'Hardware is getting cheaper and many new small devices like the famous Raspberry Pi provide new computation power that was one once only available on regular desktop computers.' category: 'Pharo') visible: true)
 ]
 
-{ #category : #singleton }
+{ #category : #accessing }
 TBBlog class >> current [
-	"answer the instance of the TBRepository"
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-  
+	^ self selectAll
+		ifNotEmpty: [ :x | x anyOne ]
+		ifEmpty: [ self new save ]
 ]
 
 { #category : #'class initialization' }
@@ -37,10 +45,28 @@ TBBlog class >> initialize [
 	self reset
 ]
 
+{ #category : #voyage }
+TBBlog class >> initializeLocalhostMongoDB [
+   | repository |
+   repository := VOMongoRepository database: 'tinyblog'.
+   repository enableSingleton.
+]
+
+{ #category : #voyage }
+TBBlog class >> initializeVoyageOnMemoryDB [
+   VOMemoryRepository new enableSingleton
+]
+
+{ #category : #voyage }
+TBBlog class >> isVoyageRoot [
+   "Indicates that instances of this class are top level documents
+    in noSQL databases"
+   ^ true
+]
+
 { #category : #accessing }
 TBBlog class >> reset [
-	"self reset"
-	uniqueInstance := nil
+	self initializeVoyageOnMemoryDB
 ]
 
 { #category : #accessing }
@@ -76,7 +102,8 @@ TBBlog >> initialize [
 
 { #category : #operations }
 TBBlog >> removeAllPosts [
-	posts := OrderedCollection new
+	posts := OrderedCollection new.
+	self save.
 ]
 
 { #category : #accessing }
@@ -87,5 +114,6 @@ TBBlog >> size [
 { #category : #operations }
 TBBlog >> writeBlogPost: aPost [
 	"Write the blog post in database"
-	posts add: aPost
+	posts add: aPost.
+	self save
 ]
